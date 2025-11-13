@@ -1,15 +1,15 @@
 <template>
   <div class="page-container">
     <div class="form-card">
-      <form>
+      <form @submit.prevent="handleSubmit">
         <div class="form-group">
           <label for="name">お名前</label>
-          <input type="text" id="name" placeholder="例：佐藤　太郎">
+          <input type="text" id="name" v-model="name" placeholder="例：佐藤　太郎">
         </div>
 
         <div class="form-group">
           <label for="email">メールアドレス</label>
-          <input type="email" id="email" placeholder="example@example.com">
+          <input type="email" id="email" v-model="email" placeholder="example@example.com">
         </div>
 
         <div class="form-group">
@@ -30,7 +30,7 @@
 
         <div class="form-group">
           <label for="message">質問内容</label>
-          <textarea id="message" rows="5" placeholder="質問内容を入力"></textarea>
+          <textarea id="message" v-model="message" rows="5" placeholder="質問内容を入力"></textarea>
         </div>
 
         <button type="submit" class="submit-button">送信</button>
@@ -39,15 +39,27 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'ContactForm',
-});
+const name = ref('');
+const email = ref('');
+const selectedCategory = ref('');
+const otherCategoryText = ref('');
+const message = ref('');
+
+const handleSubmit = () => {
+  console.log(name.value);
+  console.log(email.value);
+  console.log(selectedCategory.value);
+  console.log(otherCategoryText.value);
+  console.log(message.value);
+}
 </script>
 
 <style lang="scss" scoped>
+@use "sass:color";
+
 $primary-blue: #007bff;
 $input-border-color: #ced4da;
 $card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -107,7 +119,7 @@ textarea {
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: darken($primary-blue, 10%);
+    background-color: color.adjust($primary-blue, $lightness: -10%);
   }
 
   &:disabled {
