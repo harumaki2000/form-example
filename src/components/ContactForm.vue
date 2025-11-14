@@ -72,6 +72,12 @@ $card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   width: 100%;
   max-width: 500px;
   margin: 20px;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    margin: 10px;
+    padding: 20px;
+  }
 }
 
 .form-group {
